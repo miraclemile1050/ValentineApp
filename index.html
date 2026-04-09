@@ -26,9 +26,15 @@ body {
   display: flex;
 }
 
+.button-row {
+  display: flex;
+  gap: 100px;
+  margin-top: 20px;
+  position: relative;
+}
+
 button {
   padding: 12px 25px;
-  margin: 10px;
   font-size: 18px;
   border: none;
   border-radius: 25px;
@@ -43,15 +49,36 @@ button {
 .no {
   background-color: #f44336;
   color: white;
-  position: absolute;
 }
 
 img {
-  width: 120px;
-  height: 120px;
+  width: 22vw; /* responsive width */
+  height: 22vw; /* keeps it square */
+  max-width: 160px; /* prevents too big on large screens */
+  max-height: 160px;
+  min-width: 80px; /* prevents too small on tiny screens */
+  min-height: 80px;
   object-fit: cover;
-  border-radius: 15px;
+  border-radius: 20px;
   position: absolute;
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Vertical images for side photos */
+
+
+/* Floating animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Floating animation */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
 }
 
 .message {
@@ -63,57 +90,7 @@ img {
 </head>
 <body>
 
+<!-- Sound effect -->
+<audio id="jumpSound" src="jump.mp3"></audio>
+
 <!-- Screen 1 -->
-<div id="screen1" class="screen active">
-  <h1>Do you love me? ❤️</h1>
-  <button class="yes" onclick="nextScreen(2)">Yes</button>
-  <button onclick="noLove()">No</button>
-</div>
-
-<!-- Screen 2 -->
-<div id="screen2" class="screen">
-  <h1>Will you spend eternity with me? 💍</h1>
-  <button class="yes" onclick="nextScreen(3)">Yes</button>
-  <button id="noBtn" class="no">No</button>
-</div>
-
-<!-- Screen 3 -->
-<div id="screen3" class="screen">
-  <div class="message">
-    I dont know what you have done for other people but you have given me memories of a lifetime in this past year, more than you realise, heres to eternity and more.
-  </div>
-
-  <!-- Replace src with your images -->
-  <img src="photo1.jpg" style="top:10%; left:10%;">
-  <img src="photo2.jpg" style="top:20%; right:10%;">
-  <img src="photo3.jpg" style="bottom:20%; left:15%;">
-  <img src="photo4.jpg" style="bottom:10%; right:15%;">
-  <img src="photo5.jpg" style="top:50%; left:40%;">
-</div>
-
-<script>
-function nextScreen(screenNumber) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById('screen' + screenNumber).classList.add('active');
-}
-
-function noLove() {
-  alert("You do love me, you just dont know it yet ❤️");
-  nextScreen(2);
-}
-
-const noBtn = document.getElementById('noBtn');
-
-noBtn.addEventListener('mouseover', moveButton);
-noBtn.addEventListener('click', moveButton);
-
-function moveButton() {
-  const x = Math.random() * (window.innerWidth - 100);
-  const y = Math.random() * (window.innerHeight - 50);
-  noBtn.style.left = x + 'px';
-  noBtn.style.top = y + 'px';
-}
-</script>
-
-</body>
-</html>
